@@ -3,7 +3,8 @@
 import logging
 import yaml
 
-import bot, zhtw2ko
+import bot
+from pybopomofo2hangul import bopomofo_to_hangul
 
 def main():
     logging.basicConfig(
@@ -12,7 +13,7 @@ def main():
     )
 
     with open('env.yaml', 'r') as file:
-        tgbot = bot.bot(yaml.safe_load(file).get('bot').get('token'), handler_cb=zhtw2ko.chinese_to_hangul)
+        tgbot = bot.bot(yaml.safe_load(file).get('bot').get('token'), handler_cb=bopomofo_to_hangul)
         tgbot.start()
 
 if __name__ == '__main__':
